@@ -12,7 +12,7 @@ body{
     justify-content: center;   
     align-items: center;       
     min-height: 100vh;
-    background: url("Imagefondconnection.jpg") no-repeat center center;
+    background: url("asset/logo/Imagefondconnection.jpg") no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
     color: #8b93a8;
@@ -44,7 +44,7 @@ body{
 
 h2{
     color: #e8ecf5;
-    font-size: 34px;
+    font-size: 35px;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -106,4 +106,18 @@ p a:hover {
 
 #login-form {
     display: block;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e8ecf5;
+    margin: 22px 0 4px;
+}
+
+.role-arrive{
+    color: #e8ecf5;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
 }

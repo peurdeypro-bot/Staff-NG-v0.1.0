@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel STAFF NationsGlory 0.1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="contairer">
+            <div class="form-box active" id="login-form">
+                <form action="">
+                    <h2>Se connecter</h2>
+                    <input type="text" name="text" placeholder="Pseudo IG" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="login">Se connecter</button>
+                    <p>Tu n'as pas de compte ? <a href="#" onclick="showForm('register-form')">S'enregistrer</a></p>
+                </form>
+            </div>
+
+            <div class="form-box" id="register-form">
+                <form action="">
+                    <h2>S'enregistrer</h2>
+                    <input type="text" name="code" placeholder="Code" required>
+                    <input type="text" name="text" placeholder="Pseudo IG" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="register">Se connecter</button>
+                    <p>Tu as un compte ? <a href="#" onclick="showForm('login-form')">Se connecter</a></p>
+                </form>
+            </div>
+        </div>
+    
+        <script src="script.js"></script>
+</body>
+
+</html> 
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panneau admin — Nation's Glory</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .panel-box { max-width: 520px; }
+        .list { list-style: none; margin-top: 10px; }
+        .list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eaecf1;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #14142b;
+        }
+        .list li .code { font-weight: 700; letter-spacing: 1px; }
+        .list li .statut { font-size: 12.5px; color: #6b6e80; }
+        .list li .statut.used { color: #d9534f; }
+        .list li .statut.free { color: #3d9a53; }
+        .section-title { font-size: 15px; font-weight: 700; color: #e8ecf5; margin: 22px 0 4px; }
+        .empty { font-size: 13.5px; color: #9497a8; margin-top: 6px; }
+    </style>
+</head>
+<body>
+
+    <div class="contairer">
+        <div class="form-box active" id="gate-box">
+            <form id="gate-form">
+                <h2>Panneau developpeur</h2>
+                <input type="text" id="gate-user" placeholder="Pseudo" required>
+                <input type="password" id="gate-pass" placeholder="Mot de passe" required>
+                <button type="submit">Entrer</button>
+                <p id="gate-err" style="color:#d9534f; display:none;">Identifiants incorrects</p>
+            </form>
+        </div>
+
+        <div class="form-box panel-box" id="panel-box" style="display:none;">
+            <h2>Panneau developpeur</h2>
+
+            <button id="gen-btn">Générer un code</button>
+
+            <div class="section-title">Codes d'inscription</div>
+            <ul class="list" id="codes-list"></ul>
+            <p class="empty" id="codes-empty" style="display:none;">Aucun code généré pour l'instant.</p>
+
+            <div class="section-title">Comptes créés</div>
+            <ul class="list" id="accounts-list"></ul>
+            <p class="empty" id="accounts-empty" style="display:none;">Aucun compte créé pour l'instant.</p>
+            <a href="panel-adm.html">
+    <button>Panel adm</button>
+</a>
+
+            
+
+        </div>
+    </div>
+</body>
+
+
+<script>
+const PANEL_USER = 'admin', PANEL_PASS = 'admin';
+
+function getCodes(){ try { return JSON.parse(localStorage.getItem('ngo_regcodes') || '[]'); } catch(e){ return []; } }
+function setCodes(l){ localStorage.setItem('ngo_regcodes', JSON.stringify(l)); }
+function getAccounts(){ try { return JSON.parse(localStorage.getItem('ngo_accounts') || '[]'); } catch(e){ return []; } }
+
+function genCode(){
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let c = '';
+    for (let i = 0; i < 7; i++) c += chars[Math.floor(Math.random() * chars.length)];
+    return c;
+}
+
+function renderPanel(){
+    const codes = getCodes();
+    const codesList = document.getElementById('codes-list');
+    codesList.innerHTML = codes.slice().reverse().map(c =>
+        `<li><span class="code">${c.code}</span><span class="statut ${c.used ? 'used' : 'free'}">${c.used ? 'Utilisé par ' + c.usedBy : 'Non utilisé'}</span></li>`
+    ).join('');
+    document.getElementById('codes-empty').style.display = codes.length ? 'none' : 'block';
+
+    const accounts = getAccounts();
+    const accList = document.getElementById('accounts-list');
+    accList.innerHTML = accounts.slice().reverse().map(a =>
+        `<li><span class="code">${a.pseudo}</span><span class="statut free">${a.role || 'Staff'}</span></li>`
+    ).join('');
+    document.getElementById('accounts-empty').style.display = accounts.length ? 'none' : 'block';
+}
+
+document.getElementById('gate-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const u = document.getElementById('gate-user').value.trim();
+    const p = document.getElementById('gate-pass').value;
+    if (u === PANEL_USER && p === PANEL_PASS) {
+        document.getElementById('gate-box').style.display = 'none';
+        document.getElementById('panel-box').style.display = 'block';
+        renderPanel();
+    } else {
+        document.getElementById('gate-err').style.display = 'block';
+    }
+});
+
+document.getElementById('gen-btn').addEventListener('click', () => {
+    const codes = getCodes();
+    codes.push({ code: genCode(), used: false, usedBy: '' });
+    setCodes(codes);
+    renderPanel();
+});
+</script>
+
+</body>
+</html>
