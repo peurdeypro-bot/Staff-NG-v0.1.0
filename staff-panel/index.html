@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel STAFF NationsGlory 0.1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="contairer">
+            <div class="form-box active" id="login-form">
+                <form action="">
+                    <h2>Se connecter</h2>
+                    <input type="text" name="text" placeholder="Pseudo IG" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="login">Se connecter</button>
+                    <p>Tu n'as pas de compte ? <a href="#" onclick="showForm('register-form')">S'enregistrer</a></p>
+                </form>
+            </div>
+
+            <div class="form-box" id="register-form">
+                <form action="">
+                    <h2>S'enregistrer</h2>
+                    <input type="text" name="code" placeholder="Code" required>
+                    <input type="text" name="text" placeholder="Pseudo IG" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="register">Se connecter</button>
+                    <p>Tu as un compte ? <a href="#" onclick="showForm('login-form')">Se connecter</a></p>
+                </form>
+            </div>
+        </div>
+    
+        <script src="script.js"></script>
+</body>
+
+</html> 

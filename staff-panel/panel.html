@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel STAFF NationsGlory 0.1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contairer">
+        <div class="form-box active" style="text-align:center;">
+            <h2 id="bienvenue">Bienvenue</h2>
+            <p id="role-txt" style="margin-bottom:20px;"></p>
+            <p style="color:#9497a8; font-size:13.5px;">Le panneau complet (Modération, Administration, etc.) arrive bientôt ici.</p>
+            <button id="logout-btn" style="margin-top:20px;">Se déconnecter</button>
+        </div>
+    </div>
+
+<script>
+let user = null;
+try { user = JSON.parse(localStorage.getItem('ngo_logged_user') || 'null'); } catch(e) {}
+
+if (!user) {
+    window.location.href = 'index.html';
+} else {
+    document.getElementById('bienvenue').textContent = 'Bienvenue, ' + user.pseudo;
+    document.getElementById('role-txt').textContent = user.role || '';
+}
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('ngo_logged_user');
+    window.location.href = 'index.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;   
+    align-items: center;       
+    min-height: 100vh;
+    background: url("Imagefondconnection.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #8b93a8;
+}
+
+.contairer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    color: #8b93a8;
+}
+
+.form-box{
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: rgba(42, 50, 68, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.form-box.active {
+    display: block;
+}
+
+h2{
+    color: #e8ecf5;
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+input{
+    width: 100%;
+    padding: 12px;
+    background: #e8ecf5;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background: #8b93a8;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color:#e8ecf5;
+    margin-bottom: 20px;
+    transition: 0.5s;
+    font-weight: 500;
+}
+
+button:hover {
+    background: #3ff109;
+}
+ 
+p {
+    font-size: 14.5px;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+p a{
+    color: #3d7cf2;
+    text-decoration: none;
+}
+p a:hover {
+    text-decoration: underline;
+}
+
+.form-box{
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: rgba(42, 50, 68, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+#login-form {
+    display: block;
+}
